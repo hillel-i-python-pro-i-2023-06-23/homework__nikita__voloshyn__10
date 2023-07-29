@@ -1,5 +1,7 @@
+# app/views.py
 from django.shortcuts import render
 from .models import Contact
+from faker import Faker
 
 
 def home(request):
@@ -7,13 +9,18 @@ def home(request):
 
 
 def contact_list(request):
-    # Получаем список всех контактов из базы данных
+    # Проверяем, есть ли уже контакты в базе данных
+    if Contact.objects.count() == 0:
+        # Если нет, то создаем несколько контактов с помощью Faker
+        fake = Faker()
+        for _ in range(10):
+            first_name = fake.first_name()
+            last_name = fake.last_name()
+            email = fake.email()
+            Contact.objects.create(first_name=first_name, last_name=last_name, email=email)
+
+    # Извлекаем все объекты из модели Contact
     contacts = Contact.objects.all()
 
-    # Создаем контекст данных, которые будут переданы в шаблон
-    context = {
-        "contacts": contacts,
-    }
-
-    # Возвращаем ответ с отрисованным шаблоном contact_list.html и переданным контекстом
-    return render(request, "contact_list.html", context)
+    # Передаем список контактов в шаблон и отображаем его на странице
+    return render(request, "contact_list.html", {"contacts": contacts})
