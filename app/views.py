@@ -1,18 +1,19 @@
-from django.http import HttpResponse
-from faker import Faker
-
-fake = Faker()
+from django.shortcuts import render
+from .models import Contact
 
 
-def generate_user_data(num_users=100):
-    users = []
-    for _ in range(num_users):
-        name = fake.first_name()
-        email = fake.email()
-        user_data = f"{name} {email}"
-        users.append(user_data)
-    return users
+def home(request):
+    return render(request, "home.html")
 
 
-def index(request):
-    return HttpResponse(f"{generate_user_data()}")
+def contact_list(request):
+    # Получаем список всех контактов из базы данных
+    contacts = Contact.objects.all()
+
+    # Создаем контекст данных, которые будут переданы в шаблон
+    context = {
+        "contacts": contacts,
+    }
+
+    # Возвращаем ответ с отрисованным шаблоном contact_list.html и переданным контекстом
+    return render(request, "contact_list.html", context)
