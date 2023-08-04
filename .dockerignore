@@ -1,8 +1,0 @@
-# Ignore all
-**
-
-# Exclude
-!manage.py
-!app/
-!homework__voloshyn__10/
-!requirements.txt
