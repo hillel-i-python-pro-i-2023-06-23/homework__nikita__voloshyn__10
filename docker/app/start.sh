@@ -15,5 +15,6 @@ set -o xtrace
 # Apply database migrations.
 make migrate
 
+python manage.py create_admin
 # Run application.
 python manage.py runserver 0.0.0.0:8000

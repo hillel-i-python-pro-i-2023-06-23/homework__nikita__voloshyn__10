@@ -18,7 +18,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from app import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('', views.contact_list, name='contact_list'),
+    path('contact/<int:pk>/', views.contact_detail, name='contact_detail'),
 ]
+

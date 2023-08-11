@@ -1,10 +1,13 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import Contact, ContactGroup, ContactType, ContactData
 
+class ContactDataInline(admin.TabularInline):
+    model = ContactData
 
-class CustomUserAdmin(UserAdmin):
-    pass
+class ContactAdmin(admin.ModelAdmin):
+    inlines = [ContactDataInline]
 
-
-admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Contact, ContactAdmin)
+admin.site.register(ContactGroup)
+admin.site.register(ContactType)
+admin.site.register(ContactData)

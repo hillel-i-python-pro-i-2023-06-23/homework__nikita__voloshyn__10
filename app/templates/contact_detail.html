@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Detail - {{ contact.name }}</title>
+</head>
+<body>
+    <h1>Contact Detail - {{ contact.name }}</h1>
+    <p><strong>Birthday:</strong> {{ contact.birthday }}</p>
+    <p><strong>Groups:</strong>
+        {% for group in contact.groups.all %}
+            {{ group.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    <h2>Contact Data:</h2>
+    <ul>
+        {% for data in contact.contactdata_set.all %}
+            <li><strong>{{ data.type.name }}:</strong> {{ data.value }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
