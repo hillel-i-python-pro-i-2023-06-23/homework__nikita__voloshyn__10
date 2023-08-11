@@ -1,8 +1,8 @@
-from django import forms
-from .models import Contact
+from django.contrib.auth.forms import UserCreationForm
+from .models import CustomUser
 
 
-class ContactForm(forms.ModelForm):
-    class Meta:
-        model = Contact
-        fields = ["first_name", "last_name", "email", "phone"]
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = UserCreationForm.Meta.fields

@@ -1,14 +1,15 @@
+<!-- create_user.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Contact Form</title>
+    <title>Create User</title>
 </head>
 <body>
-    <h1>Contact Form</h1>
+    <h2>Create User</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Save">
+        <button type="submit">Create</button>
     </form>
 </body>
 </html>

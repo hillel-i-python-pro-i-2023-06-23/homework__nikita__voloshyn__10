@@ -121,4 +121,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-ALLOWED_HOSTS = ["*"]  # Разрешить все хосты
+ALLOWED_HOSTS = ["*"]  # Разрешить все хостыё
+
+AUTH_USER_MODEL = "app.CustomUser"
