@@ -3,15 +3,16 @@ from django.views import View
 from faker import Faker
 from webargs import fields, validate
 from webargs.djangoparser import use_args
-from .models import CustomUser
+from .models import User
 
 fake = Faker()
 
 class UserGeneratorView(View):
     @use_args(
         {
-            "count": fields.Int(required=False, missing=5, validate=validate.Range(min=1, max=100)),
-        }
+            "count": fields.Int(required=False, missing=10, validate=validate.Range(min=1, max=100)),
+        },
+        location="query"
     )
     def get(self, request, args):
         users = []
@@ -24,9 +25,9 @@ class UserGeneratorView(View):
             password = fake.password()
 
             if (
-                not CustomUser.objects.filter(login=login).exists()
+                not User.objects.filter(login=login).exists()
                 and login not in generated_logins
-                and not CustomUser.objects.filter(email=email).exists()
+                and not User.objects.filter(email=email).exists()
                 and email not in generated_emails
             ):
                 generated_logins.add(login)
