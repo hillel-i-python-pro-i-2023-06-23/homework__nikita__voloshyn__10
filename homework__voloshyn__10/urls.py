@@ -16,9 +16,8 @@ Including another URLconf
 """
 
 from django.urls import path
-from app.views import home, contact_list
+from app.views import contact_list
 
 urlpatterns = [
-    path("", home, name="home"),
-    path("contacts/", contact_list, name="contact_list"),
+    path('contacts/', contact_list, name='contact_list'),
 ]

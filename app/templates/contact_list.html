@@ -1,4 +1,3 @@
-<!-- app/templates/contact_list.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,7 @@
     <h1>Contact List</h1>
     <ul>
         {% for contact in contacts %}
-        <li>{{ contact.first_name }} {{ contact.last_name }} - {{ contact.email }}</li>
+            <li>{{ contact.first_name }} - {{ contact.phone }}</li>
         {% endfor %}
     </ul>
 </body>

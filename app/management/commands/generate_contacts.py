@@ -1,18 +1,22 @@
 from django.core.management.base import BaseCommand
-from datetime import datetime
-from app.models import Contact
+from faker import Faker
+from contacts.models import Contact
 
+fake = Faker()
 
 class Command(BaseCommand):
-    help = "Generate contacts"
+    help = 'Generate random contacts'
 
     def add_arguments(self, parser):
-        parser.add_argument("count", type=int, default=10, help="Number of contacts to generate.")
+        parser.add_argument('count', type=int, default=10, help='Number of contacts to generate')
 
-    def handle(self, *args, **kwargs):
-        count = kwargs["count"]
+    def handle(self, *args, **options):
+        count = options['count']
+
         for _ in range(count):
-            name = "Contact " + str(datetime.now().microsecond)
-            phone = "Phone " + str(datetime.now().microsecond)
-            contact = Contact.objects.create(name=name, phone=phone)
-            contact.save()
+            Contact.objects.create(
+                first_name=fake.first_name(),
+                phone=fake.phone_number(),
+            )
+
+        self.stdout.write(self.style.SUCCESS(f'Successfully generated {count} contacts'))
