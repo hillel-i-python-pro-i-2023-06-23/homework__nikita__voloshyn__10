@@ -2,8 +2,9 @@
 **
 
 # Exclude
-!app/templates
 !manage.py
 !app/
 !homework__voloshyn__10/
 !requirements.txt
+!Makefile
+!docker/app

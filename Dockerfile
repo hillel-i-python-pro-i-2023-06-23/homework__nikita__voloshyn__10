@@ -17,9 +17,13 @@ COPY --chown=${USER} requirements.txt requirements.txt
 RUN pip install --upgrade pip && \
     pip install --requirement requirements.txt
 
+COPY --chown=${USER} --chmod=555 ./docker/app/entrypoint.sh /entrypoint.sh
+COPY --chown=${USER} --chmod=555 ./docker/app/start.sh /start.sh
+
+COPY --chown=${USER} ./Makefile Makefile
+COPY --chown=${USER} ./manage.py manage.py
 COPY --chown=${USER} ./homework__voloshyn__10 homework__voloshyn__10
 COPY --chown=${USER} ./app app
-COPY --chown=${USER} ./manage.py manage.py
 
 USER ${USER}
 
@@ -27,6 +31,6 @@ VOLUME ${WORKDIR}/db
 
 EXPOSE 8000
 
-RUN python manage.py migrate
+ENTRYPOINT ["/entrypoint.sh"]
 
-ENTRYPOINT ["python", "manage.py", "runserver"]
+CMD ["/start.sh"]

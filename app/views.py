@@ -3,7 +3,6 @@ from django.views import View
 from faker import Faker
 from webargs import fields, validate
 from webargs.djangoparser import use_args
-from .models import User
 
 fake = Faker()
 
@@ -24,14 +23,10 @@ class UserGeneratorView(View):
             email = fake.email()
             password = fake.password()
 
-            if (
-                not User.objects.filter(login=login).exists()
-                and login not in generated_logins
-                and not User.objects.filter(email=email).exists()
-                and email not in generated_emails
-            ):
-                generated_logins.add(login)
-                generated_emails.add(email)
-                users.append({"login": login, "email": email, "password": password})
+            user = {"login": login, "email": email, "password": password}
+
+            generated_logins.add(login)
+            generated_emails.add(email)
+            users.append(user)
 
         return render(request, "user_list.html", {"users": users})
