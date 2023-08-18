@@ -19,5 +19,5 @@ from django.urls import path
 from app.views import contact_list
 
 urlpatterns = [
-    path('contacts/', contact_list, name='contact_list'),
+    path("contacts/", contact_list, name="contact_list"),
 ]
