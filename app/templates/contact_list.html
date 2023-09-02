@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Contact List</h1>
-    <ul>
-        {% for contact in contacts %}
-            <li><a href="{% url 'contact_detail' contact.pk %}">{{ contact.name }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="container mt-5">
+        <h1 class="mb-4">Contact List</h1>
+        <ul class="list-group">
+            {% for contact in contacts %}
+                <li class="list-group-item">
+                    <a href="{% url 'contact_detail' contact.pk %}">{{ contact.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

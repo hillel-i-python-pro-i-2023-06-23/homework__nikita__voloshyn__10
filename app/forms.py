@@ -1,12 +1,17 @@
 from django import forms
-from .models import Contact, ContactData
+from .models import Contact, ContactGroup, ContactType
 
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-        fields = '__all__'
+        fields = ['name', 'birthday']
 
-class ContactDataForm(forms.ModelForm):
+class ContactGroupForm(forms.ModelForm):
     class Meta:
-        model = ContactData
-        fields = '__all__'
+        model = ContactGroup
+        fields = ['name']
+
+class ContactTypeForm(forms.ModelForm):
+    class Meta:
+        model = ContactType
+        fields = ['name']
