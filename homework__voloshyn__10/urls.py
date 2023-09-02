@@ -22,8 +22,7 @@ from app import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', views.generate_users, name='generate_users'),
-    path('contact/list', views.contact_list, name='contact_list'),
-    path('contact/<int:pk>/', views.contact_detail, name='contact_detail'),
+    path("", views.generate_users, name="generate_users"),
+    path("contact/list", views.contact_list, name="contact_list"),
+    path("contact/<int:pk>/", views.contact_detail, name="contact_detail"),
 ]
-
