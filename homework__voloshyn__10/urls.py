@@ -22,7 +22,9 @@ from app import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.generate_users, name="generate_users"),
-    path("contact/list", views.contact_list, name="contact_list"),
-    path("contact/<int:pk>/", views.contact_detail, name="contact_detail"),
+    path('', views.ContactListView.as_view(), name='contact_list'),
+    path('contact/<int:pk>/', views.ContactDetailView.as_view(), name='view_contact'),
+    path('contact/create/', views.ContactCreateView.as_view(), name='create_contact'),
+    path('contact/<int:pk>/update/', views.ContactUpdateView.as_view(), name='update_contact'),
+    path('contact/<int:pk>/delete/', views.ContactDeleteView.as_view(), name='delete_contact'),
 ]

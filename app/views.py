@@ -1,23 +1,32 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Contact
-from .management.commands.populate_contacts import generate_users_function
 
+class ContactListView(ListView):
+    model = Contact
+    template_name = 'contact_list.html'
+    context_object_name = 'contacts'
 
-def contact_list(request):
-    contacts = Contact.objects.all()
-    return render(request, "contact_list.html", {"contacts": contacts})
+class ContactDetailView(DetailView):
+    model = Contact
+    template_name = 'view_contact.html'
+    context_object_name = 'contact'
 
+class ContactCreateView(CreateView):
+    model = Contact
+    template_name = 'create_contact.html'
+    fields = ['name', 'email']
+    success_url = reverse_lazy('contact_list')
 
-def contact_detail(request, pk):
-    contact = get_object_or_404(Contact, pk=pk)
-    return render(request, "contact_detail.html", {"contact": contact})
+class ContactUpdateView(UpdateView):
+    model = Contact
+    template_name = 'update_contact.html'
+    fields = ['name', 'email']
+    context_object_name = 'contact'
+    success_url = reverse_lazy('contact_list')
 
-
-def generate_users(request):
-    if request.method == "POST":
-        generate_users_function()
-
-        return HttpResponseRedirect("/admin")
-
-    return render(request, "generate_users.html")
+class ContactDeleteView(DeleteView):
+    model = Contact
+    template_name = 'delete_contact.html'
+    context_object_name = 'contact'
+    success_url = reverse_lazy('contact_list')

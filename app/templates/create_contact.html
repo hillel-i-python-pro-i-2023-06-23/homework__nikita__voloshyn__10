@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Contact{% endblock %}
+
+{% block content %}
+<h1>Create Contact</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
+<a class="btn btn-secondary mt-3" href="{% url 'contact_list' %}">Back to Contacts</a>
+{% endblock %}

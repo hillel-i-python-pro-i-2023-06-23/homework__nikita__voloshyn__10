@@ -1,24 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Contact List</h1>
-        <ul class="list-group">
-            {% for contact in contacts %}
-                <li class="list-group-item">
-                    <a href="{% url 'contact_detail' contact.pk %}">{{ contact.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+{% extends 'base.html' %}
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+{% block title %}Contact List{% endblock %}
+
+{% block content %}
+<h1>Contact List</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for contact in contacts %}
+    <tr>
+      <td>{{ contact.name }}</td>
+      <td>{{ contact.email }}</td>
+      <td>
+        <a class="btn btn-info" href="{% url 'view_contact' contact.id %}">View</a>
+        <a class="btn btn-warning" href="{% url 'update_contact' contact.id %}">Edit</a>
+        <a class="btn btn-danger" href="{% url 'delete_contact' contact.id %}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a class="btn btn-primary" href="{% url 'create_contact' %}">Add Contact</a>
+{% endblock %}
