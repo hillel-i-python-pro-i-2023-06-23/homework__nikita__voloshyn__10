@@ -1,24 +1,35 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class ContactGroup(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
+
+
 class ContactType(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
+
 
 class Contact(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    groups = models.ManyToManyField(ContactGroup, blank=True)
+    types = models.ManyToManyField(ContactType, blank=True)
     name = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
     birthday = models.DateField(null=True, blank=True)
-    groups = models.ManyToManyField(ContactGroup)
-    types = models.ManyToManyField(ContactType)
+    telegram = models.CharField(max_length=255, blank=True)
+    linkedin = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.name
+
 
 class ContactData(models.Model):
     CONTACT_DATA_TYPES = (
